@@ -5,8 +5,42 @@ Kaggle conducted a survey to establish a comprehensive view of the state of data
 
 We used visualization techniques we explore this dataset, discovered important patterns in the data science field, and concludes different recommendations for data scientist.
 
-1.	General Demographics information:	9
-![Images are easy](https://c1.staticflickr.com/3/2835/12680465824_c959772b64_t.jpg)
+#### Required Libraries:
+```` 
+require(data.table)
+require(highcharter)
+require(ggplot2)
+require(tidyverse)
+```` 
+
+#### Read data
+```` 
+SurveyDf<-read.csv("multipleChoiceResponses.csv",header = TRUE)
+```` 
+
+#### Part 1.	Analyzing General Demographics information:
+Explor data numarically 
+```` 
+attach(SurveyDf)
+table(SurveyDf$GenderSelect)
+table(SurveyDf$Country)
+summary(na.omit(SurveyDf$Age))
+```` 
+barplot of Gender
+```` 
+hchart(SurveyDf$GenderSelect,type="bar",name="count",color="green") %>%
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Barplot of gender",align="center") %>%
+  hc_add_theme(hc_theme_elementary()) 
+```` 
+
+histogram of age of participants
+```` 
+hchart(na.omit(SurveyDf$Age),name="count",color="orange") %>%
+  hc_title(text="Histogram of Ages of the participants",align="center") %>%
+  hc_exporting(enabled=TRUE) %>%
+  hc_add_theme(hc_theme_elementary())
+```` 
 
 2.	Region:	9
 3.	Learning data science in Education:	10
