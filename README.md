@@ -35,9 +35,9 @@ hchart(SurveyDf$GenderSelect,type="bar",name="count",color="green") %>%
 ```` 
 
 
-![Images are easy](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/1.png)
+![barplot of Gender](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/2.png)
 
-[Links are simple](http://rpubs.com/Sedeeq/No2)
+[Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No2)
 
 histogram of age of participants
 ```` 
