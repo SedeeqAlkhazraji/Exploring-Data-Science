@@ -18,7 +18,7 @@ require(tidyverse)
 SurveyDf<-read.csv("multipleChoiceResponses.csv",header = TRUE)
 ```` 
 
-#### Part 1.	Analyzing General Demographics information:
+#### Part 1)	Analyzing General Demographics information:
 Explor data numarically 
 ```` 
 attach(SurveyDf)
@@ -50,8 +50,69 @@ hchart(na.omit(SurveyDf$Age),name="count",color="orange") %>%
 
 [Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No2)
 
-2.	Region:	9
-3.	Learning data science in Education:	10
+#### Part 2)	Analyzing Region data:
+#barplot of country
+
+```` 
+hchart(SurveyDf$Country,type="bar",name="Count",color="blue") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Barplot of Country or participants",align="center") %>%
+  hc_add_theme(hc_theme_elementary()) 
+```` 
+
+![barplot of Gender](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/3.png)
+
+[Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No3)
+
+#treemap of top 10  countries  of participant
+```` 
+countryCount<-as.data.frame(table(SurveyDf$Country)) %>%  top_n(10) 
+hchart(countryCount,hcaes(Var1,value=Freq,color=Freq),name="Count of participants",type="treemap") %>%
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Tree map of top 10 countries of participants",align="center") %>%
+  hc_add_theme(hc_theme_elementary()) 
+```` 
+
+![barplot of Gender](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/4.png)
+
+[Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No4)
+
+#### Part 3) Learning data science in Education:
+
+Let’s see how many are students
+
+```` 
+table(SurveyDf$StudentStatus)#most didn't fill this field
+#let's check if participants are learning DS or not
+table(SurveyDf$LearningDataScience) #most of them didn't answered this too
+
+hchart(LearningDataScience,name="count",type="column",color="#99FF33") %>%
+  hc_title(text="Barplot of Learning Data science field",align="center") %>%
+  hc_exporting(enabled=TRUE) %>%
+  hc_add_theme(hc_theme_elementary())
+```` 
+
+![barplot of Gender](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/5.png)
+
+[Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No5)
+
+
+Let’s see how many are Coders
+
+```` 
+table(CodeWriter)
+hchart(CodeWriter,type="column",name="Count",color="#9645FF") %>%
+  hc_title(text="Barplot of Number of Coders",align="center") %>%
+  hc_exporting(enabled=TRUE) %>%
+  hc_add_theme(hc_theme_elementary())
+```` 
+
+![barplot of Gender](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/6.png)
+
+[Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No6)
+
+  
+
 4.	Job info:	10
 5.	Tools for implementing Data science:	12
 6.	ML method:	13
