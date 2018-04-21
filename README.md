@@ -26,7 +26,7 @@ table(SurveyDf$GenderSelect)
 table(SurveyDf$Country)
 summary(na.omit(SurveyDf$Age))
 ```` 
-barplot of Gender
+Gender 
 ```` 
 hchart(SurveyDf$GenderSelect,type="bar",name="count",color="green") %>%
   hc_exporting(enabled = TRUE) %>%
@@ -35,17 +35,20 @@ hchart(SurveyDf$GenderSelect,type="bar",name="count",color="green") %>%
 ```` 
 
 
-![barplot of Gender](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/2.png)
+![barplot of Gender](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/1.png)
 
-[Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No2)
+[Interactive barplot of Gender](http://rpubs.com/Sedeeq/No1)
 
-histogram of age of participants
+Age of participants
 ```` 
 hchart(na.omit(SurveyDf$Age),name="count",color="orange") %>%
   hc_title(text="Histogram of Ages of the participants",align="center") %>%
   hc_exporting(enabled=TRUE) %>%
   hc_add_theme(hc_theme_elementary())
 ```` 
+![barplot of Gender](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/2.png)
+
+[Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No2)
 
 2.	Region:	9
 3.	Learning data science in Education:	10
