@@ -34,6 +34,10 @@ hchart(SurveyDf$GenderSelect,type="bar",name="count",color="green") %>%
   hc_add_theme(hc_theme_elementary()) 
 ```` 
 
+
+![Images are easy](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/1.png)
+
+
 histogram of age of participants
 ```` 
 hchart(na.omit(SurveyDf$Age),name="count",color="orange") %>%
