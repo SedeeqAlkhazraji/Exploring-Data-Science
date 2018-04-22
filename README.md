@@ -16,12 +16,22 @@ require(tidyverse)
 #### Read data
 ```` 
 SurveyDf<-read.csv("multipleChoiceResponses.csv",header = TRUE)
+attach(SurveyDf)
+
+#Points: 5-8
+attach(SurveyDf)
+table(MLToolNextYearSelect)
+#Let’s start with the most preferred tool for implementing DS and ML.
+tooldf<-as.data.frame(table(MLToolNextYearSelect)) %>% arrange(desc(Freq))
+#let's remove missing value
+tooldf[1,]<-NA
+tooldf<-na.omit(tooldf)
+names(tooldf)<-c("Tool","Count")
 ```` 
 
-#### Part 1)	Analyzing General Demographics information:
+#### Part 1) Analyzing General Demographics information:
 Explor data numarically 
 ```` 
-attach(SurveyDf)
 table(SurveyDf$GenderSelect)
 table(SurveyDf$Country)
 summary(na.omit(SurveyDf$Age))
@@ -50,7 +60,7 @@ hchart(na.omit(SurveyDf$Age),name="count",color="orange") %>%
 
 [Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No2)
 
-#### Part 2)	Analyzing Region data:
+#### Part 2) Analyzing Region data:
 #barplot of country
 
 ```` 
@@ -113,7 +123,7 @@ hchart(CodeWriter,type="column",name="Count",color="#9645FF") %>%
 
   
 
-4.	Job info:	
+4. Job info:
 
 #barplot of Emp_status
 ````
@@ -257,8 +267,46 @@ ggplot(df) +
 [Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No11)
 
 
-5.	Tools for implementing Data science:	12
-6.	ML method:	13
-7.	Data Collection and learning:	14
-8.	Language Recommendation:	15
-9.	Look-Alike Model Using Euclidean Distance:	16
+5. Tools for implementing Data science:
+
+
+tools used by participants
+
+hchart(tooldf,hcaes(x=Tool,y=Count),type="column",name="Count",color="#9B6ED8") %>%  
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Barplot of tools used by participants",align="center") %>%
+  hc_add_theme(hc_theme_elementary()) 
+
+
+
+Funnel chart of top 10 most used tools used by survey participants
+
+toptooldf<-na.omit(tooldf) %>% arrange(desc(Count)) %>% top_n(10)
+#plotting a funnel chart of top 10 most used tools entered by the users
+col <- c("#d35400", "#2980b9", "#2ecc71", "#f1c40f", "#2c3e50", "#7f8c8d","#000004", "#3B0F70", "#8C2981", "#DE4968")
+
+hchart(toptooldf,hcaes(x=Tool,y=Count),type="funnel",name="Count",color=col) %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Funnel chart of top 10 most used tools used by survey participants",align="center")
+
+
+
+#dataframe of top 10 countries 
+countryCount<-as.data.frame(table(SurveyDf$Country)) %>%  top_n(10)
+
+countryTool<-SurveyDf %>% group_by(MLToolNextYearSelect,Country) %>%
+  dplyr::select(Country,MLToolNextYearSelect) %>% 
+  filter(Country %in% countryCount$Var1, MLToolNextYearSelect %in% toptooldf$Tool) %>%
+  summarise(total_count=n()) %>%
+  arrange(desc(total_count))
+#Barplot of Top 10 Country grouped by Tool
+hchart(countryTool,hcaes(x=Country,y=total_count,group=MLToolNextYearSelect),type="column") %>% 
+  hc_title(text="Barplot of Top 10 Country grouped by Tool",align="center") %>%
+  hc_exporting(enabled=TRUE) 
+  
+  
+  
+6. ML method:
+7. Data Collection and learning:
+8. Language Recommendation: 
+9. Look-Alike Model Using Euclidean Distance:
