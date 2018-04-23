@@ -267,20 +267,22 @@ ggplot(df) +
 [Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No11)
 
 
-5. Tools for implementing Data science:
-
+#### Part 5) Tools for implementing Data science:
 
 tools used by participants
-
+````
 hchart(tooldf,hcaes(x=Tool,y=Count),type="column",name="Count",color="#9B6ED8") %>%  
   hc_exporting(enabled = TRUE) %>%
   hc_title(text="Barplot of tools used by participants",align="center") %>%
   hc_add_theme(hc_theme_elementary()) 
+````
+![barplot of Gender](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/12.png)
 
+[Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No12)
 
 
 Funnel chart of top 10 most used tools used by survey participants
-
+````
 toptooldf<-na.omit(tooldf) %>% arrange(desc(Count)) %>% top_n(10)
 #plotting a funnel chart of top 10 most used tools entered by the users
 col <- c("#d35400", "#2980b9", "#2ecc71", "#f1c40f", "#2c3e50", "#7f8c8d","#000004", "#3B0F70", "#8C2981", "#DE4968")
@@ -288,10 +290,14 @@ col <- c("#d35400", "#2980b9", "#2ecc71", "#f1c40f", "#2c3e50", "#7f8c8d","#0000
 hchart(toptooldf,hcaes(x=Tool,y=Count),type="funnel",name="Count",color=col) %>% 
   hc_exporting(enabled = TRUE) %>%
   hc_title(text="Funnel chart of top 10 most used tools used by survey participants",align="center")
+````
+![barplot of Gender](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/13.png)
+
+[Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No13)
 
 
-
-#dataframe of top 10 countries 
+of top 10 countries 
+````
 countryCount<-as.data.frame(table(SurveyDf$Country)) %>%  top_n(10)
 
 countryTool<-SurveyDf %>% group_by(MLToolNextYearSelect,Country) %>%
@@ -303,9 +309,79 @@ countryTool<-SurveyDf %>% group_by(MLToolNextYearSelect,Country) %>%
 hchart(countryTool,hcaes(x=Country,y=total_count,group=MLToolNextYearSelect),type="column") %>% 
   hc_title(text="Barplot of Top 10 Country grouped by Tool",align="center") %>%
   hc_exporting(enabled=TRUE) 
+````  
+![barplot of Gender](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/14.png)
+
+[Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No14)
+  
+Based on Tool
+````
+ggplot(aes(x=Country,y=total_count),data=countryTool) +
+  geom_col(fill="purple") +
+  coord_flip() +
+  facet_wrap(~MLToolNextYearSelect)
+````  
+![barplot of Gender](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/15.png)
+
+[Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No15)
+
+
+Gender vs Most preferred tool
+````
+genderTool<-SurveyDf %>% group_by(MLToolNextYearSelect,GenderSelect) %>%
+  dplyr::select(GenderSelect,MLToolNextYearSelect) %>% 
+  filter(MLToolNextYearSelect %in% toptooldf$Tool,GenderSelect %in% c("Male","Female")) %>%
+  summarise(total_count=n()) %>%
+  arrange(desc(total_count))
+
+hchart(genderTool,hcaes(x=MLToolNextYearSelect,y=total_count,group=GenderSelect),type="column") %>%   hc_title(text="Gender vs Most preferred tool",align="center") %>%
+  hc_exporting(enabled=TRUE) 
+````  
+![barplot of Gender](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/16.png)
+
+[Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No16)
   
   
-  
+
+
+Boxplot of Top 3 Ml tools used by participants and their Ages
+````
+AgeTooldf<-SurveyDf %>% group_by(MLToolNextYearSelect) %>%
+  filter(MLToolNextYearSelect %in% c("TensorFlow","R","Python","Spark / MLlib","Amazon Web services","Hadoop/Hive/Pig","Google Cloud Compute","Jupyter notebooks")) %>% 
+  dplyr::select(MLToolNextYearSelect,Age)
+
+hcboxplot(x = AgeTooldf$Age, var = AgeTooldf$MLToolNextYearSelect ,name = "Age", color = "#FF5733",outliers = FALSE) %>%
+  hc_chart(type="column") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Boxplot of Top 3 Ml tools used by participants and their Ages",align="center") %>% 
+  hc_add_theme(hc_theme_elementary())
+
+#Scatter plot of ML tools used by participants and their Mean Ages
+meanAgeTool<-SurveyDf %>% group_by(MLToolNextYearSelect) %>%
+  summarise(meanAge=mean(Age,na.rm=T)) %>%      
+  arrange(desc(meanAge))
+
+#rounding off the mean ages
+meanAgeTool$meanAge<-round(meanAgeTool$meanAge,1)
+names(meanAgeTool)<-c("Tool","MeanAge")#renaming the columns
+
+
+topAgeTool<-meanAgeTool %>% filter(Tool %in% toptooldf$Tool)
+col<-c("#d35400", "#2980b9", "#2ecc71", "#f1c40f", "#2c3e50", "#7f8c8d","#000004", "#3B0F70", "#8C2981", "#DE4968")
+#let's make a scatterplot
+
+hchart(meanAgeTool,hcaes(x=Tool,y=MeanAge),name="Tool" ,type="scatter",color="#F44E1D") %>% 
+  hc_chart(type="column") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Scatter plot of ML tools used by participants and their Mean  
+           Ages",align="center") %>% 
+  hc_add_theme(hc_theme_elementary())
+````
+![barplot of Gender](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/17.png)
+
+[Interactive histogram for age of participants](http://rpubs.com/Sedeeq/No17)
+
+
 6. ML method:
 7. Data Collection and learning:
 8. Language Recommendation: 
