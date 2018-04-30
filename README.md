@@ -383,7 +383,235 @@ hchart(meanAgeTool,hcaes(x=Tool,y=MeanAge),name="Tool" ,type="scatter",color="#F
 [Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No17)
 
 
-6. ML method:
+6. ML method
+Let’s analyze the most used ML method?
+````
+table(MLMethodNextYearSelect)
+#Barplot of ML Method used by participants
+Mlmethod<-as.data.frame(table(MLMethodNextYearSelect)) %>% arrange(desc(Freq))
+
+Mlmethod[1,]<-NA
+names(Mlmethod)<-c("Method","Count")
+
+hchart(na.omit(Mlmethod),hcaes(x=Method,y=Count),type="column",name="Count",color="#FF5733") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Barplot of ML Method used by participants",align="center") %>%
+  hc_add_theme(hc_theme_elementary()) 
+````  
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/18.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No18)
+
+  
+
+````
+treemap of most preferred methods of ML
+hchart(Mlmethod, "treemap", hcaes(x = Method, value = Count,color=Count)) %>%
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Treemap of ML Method used by participants",align="center") 
+````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/19.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No19)
+
+
 7. Data Collection and learning:
+Favourite Platform to learn Data science
+````
+platformdf<-SurveyDf %>% group_by(LearningPlatformSelect) %>%
+  summarise(count=n()) %>% top_n(20) %>% arrange(desc(count))
+platformdf[1,]<-NA
+
+hchart(na.omit(platformdf),hcaes(x=LearningPlatformSelect,y=count),type="column",color="yellow") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Barplot of top 20 platforms used by participants to learn Data science",align="center") %>% 
+  hc_add_theme(hc_theme_elementary()) 
+ ```` 
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/20.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No20)
+
+
+Pie chart of usefullness of learning platform
+````
+df<- SurveyDf %>% dplyr::select(LearningPlatformUsefulnessArxiv,LearningPlatformUsefulnessYouTube,LearningPlatformUsefulnessKaggle,LearningPlatformUsefulnessCollege,LearningPlatformUsefulnessCourses) 
+df<-df[complete.cases(df),]
+# Data
+````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/21.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No21)
+
+
+Pie chart of Question How usefull are Online courses as learning platform
+````
+hchart(df$LearningPlatformUsefulnessCourses, "pie")  %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Pie chart of Question How usefull are Online courses as learning platform",align="center") %>% 
+  hc_add_theme(hc_theme_elementary()) 
+````
+
+Pie chart of Question How usefull us Collage as learning platform
+````
+hchart(df$LearningPlatformUsefulnessCollege, "pie")  %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Pie chart of Question How usefull us Collage as learning platform",align="center") %>% 
+  hc_add_theme(hc_theme_elementary()) 
+````
+
+Pie chart of Question How usefull is Kaggle as learning platform
+````
+hchart(df$LearningPlatformUsefulnessKaggle, "pie")  %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Pie chart of Question How usefull is Kaggle as learning platform",align="center") %>% 
+  hc_add_theme(hc_theme_elementary()) 
+````
+
+Pie chart of Question How usefull is Youtube as learning platform
+````
+hchart(df$LearningPlatformUsefulnessYouTube, "pie") %>%  
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Pie chart of Question How usefull is Youtube as learning platform",align="center") %>% 
+  hc_add_theme(hc_theme_elementary()) 
+````
+
 8. Language Recommendation: 
-9. Look-Alike Model Using Euclidean Distance:
+The most recommended tool by participants
+````
+table(LanguageRecommendationSelect)
+toolRecomdf<-as.data.frame(table(LanguageRecommendationSelect)) 
+names(toolRecomdf)<-c("tool","count")
+toolRecomdf[1,]<-0 
+toolRecomdf <- toolRecomdf %>% arrange(desc(count))
+hchart(na.omit(toolRecomdf),hcaes(x=tool,y=count),color="#56C1FE",type="column") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Barplot of Recommended tools of participants",align="center") %>%
+  hc_add_theme(hc_theme_elementary()) 
+````  
+  
+Barplot of Recommended tools of participants
+````
+hcboxplot(x = SurveyDf$Age , var = SurveyDf$LanguageRecommendationSelect,name = "Age", color = "#E127AB",outliers = FALSE) %>%
+  hc_chart(type="column") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Boxplot of tools recommended by participants and their Ages",align="center") %>% 
+  hc_add_theme(hc_theme_elementary())
+````
+
+Which skills are important for becoming a data scientist?
+let's make a function to ease things
+function takes argument as a dataframe and the categorical variable which we want summarize and group
+````
+aggr<-function(df,var) 
+{
+  require(dplyr)
+  var <- enquo(var) #quoting
+  dfname<-df %>% 
+    group_by_at(vars(!!var)) %>%  ## Group by variables selected by name:
+    summarise(count=n()) %>%
+    arrange(desc(count))
+  
+  dfname#function returns a summarized dataframe
+  
+}
+
+RSkill<-aggr(SurveyDf,JobSkillImportanceR)
+RSkill[1,]<-NA
+SqlSkill<-aggr(SurveyDf,JobSkillImportanceSQL)
+SqlSkill[1,]<-NA
+PythonSkill<-aggr(SurveyDf,JobSkillImportancePython)
+PythonSkill[1,]<-NA
+BigDataSkill<-aggr(SurveyDf,JobSkillImportanceBigData)
+BigDataSkill[1,]<-NA
+StatsSkill<-aggr(SurveyDf,JobSkillImportanceStats)
+StatsSkill[1,]<-NA
+DegreeSkill<-aggr(SurveyDf,JobSkillImportanceDegree)
+DegreeSkill[1,]<-NA
+EnterToolsSkill<-aggr(SurveyDf,JobSkillImportanceEnterpriseTools)
+EnterToolsSkill[1,]<-NA
+MOOCSkill<-aggr(SurveyDf,JobSkillImportanceMOOC)
+MOOCSkill[1,]<-NA
+DataVisSkill<-aggr(SurveyDf,JobSkillImportanceVisualizations)
+DataVisSkill[1,]<-NA
+KaggleRankSkill<-aggr(SurveyDf,JobSkillImportanceKaggleRanking)
+KaggleRankSkill[1,]<-NA
+````
+
+````
+#R
+hchart(na.omit(RSkill),hcaes(x=JobSkillImportanceR,y=count),type="pie",name="Count") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Piechart of importance of R skill",align="center") %>%
+  hc_add_theme(hc_theme_elementary())
+````
+
+````
+#Python
+hchart(na.omit(PythonSkill),hcaes(x=JobSkillImportancePython,y=count),type="pie",name="Count") %>%
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Piechart of importance of Python skill",align="center") %>%
+  hc_add_theme(hc_theme_elementary())
+````
+
+````
+#SQL
+hchart(na.omit(SqlSkill),hcaes(x=JobSkillImportanceSQL,y=count),type="pie",name="Count") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Piechart of importance of SQL skill",align="center") %>%
+  hc_add_theme(hc_theme_elementary())
+````
+
+````
+#Big Data
+hchart(na.omit(BigDataSkill),hcaes(x=JobSkillImportanceBigData,y=count),type="pie",name="Count") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Piechart of importance of Big Data skill",align="center") %>%
+  hc_add_theme(hc_theme_elementary())
+````
+
+````
+#Statistic
+hchart(na.omit(StatsSkill),hcaes(x=JobSkillImportanceStats,y=count),type="pie",name="Count") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Piechart of importance of Statistics kill",align="center") %>%
+  hc_add_theme(hc_theme_elementary())
+````
+
+````
+#Data Visulaization
+hchart(na.omit(DataVisSkill),hcaes(x=JobSkillImportanceVisualizations,y=count),type="pie",name="Count") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Piechart of importance of Data Viz skill",align="center") %>%
+  hc_add_theme(hc_theme_elementary())
+````
+````
+#Importance of Degree
+hchart(na.omit(DegreeSkill),hcaes(x=JobSkillImportanceDegree,y=count),type="pie",name="Count") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Piechart of importance of Degree",align="center") %>%
+  hc_add_theme(hc_theme_elementary())
+````
+
+````
+#Importance of Enterprise Tools skill
+hchart(na.omit(EnterToolsSkill),hcaes(x=JobSkillImportanceEnterpriseTools,y=count),type="pie",name="Count") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Piechart of importance of Enterprise Tools skill",align="center") %>%
+  hc_add_theme(hc_theme_elementary())
+````
+
+````
+#Importance of MOOCs
+hchart(na.omit(MOOCSkill),hcaes(x=JobSkillImportanceMOOC,y=count),type="pie",name="Count") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Piechart of importance of MOOCs",align="center") %>%
+  hc_add_theme(hc_theme_elementary())
+````
+
+````
+#Importance of Kaggle Rankings
+hchart(na.omit(KaggleRankSkill),hcaes(x=JobSkillImportanceKaggleRanking,y=count),type="pie",name="Count") %>% 
+  hc_exporting(enabled = TRUE) %>%
+  hc_title(text="Piechart of importance of Kaggle Rankings",align="center") %>%
+  hc_add_theme(hc_theme_elementary())
+````
