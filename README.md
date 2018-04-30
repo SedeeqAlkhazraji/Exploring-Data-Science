@@ -386,6 +386,7 @@ hchart(meanAgeTool,hcaes(x=Tool,y=MeanAge),name="Tool" ,type="scatter",color="#F
 6. ML method
 Let’s analyze the most used ML method?
 ````
+#The most used ML method
 table(MLMethodNextYearSelect)
 #Barplot of ML Method used by participants
 Mlmethod<-as.data.frame(table(MLMethodNextYearSelect)) %>% arrange(desc(Freq))
@@ -403,7 +404,7 @@ hchart(na.omit(Mlmethod),hcaes(x=Method,y=Count),type="column",name="Count",colo
 [Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No18)
 
   
-
+Treemap of most preferred methods of ML
 ````
 treemap of most preferred methods of ML
 hchart(Mlmethod, "treemap", hcaes(x = Method, value = Count,color=Count)) %>%
@@ -418,6 +419,7 @@ hchart(Mlmethod, "treemap", hcaes(x = Method, value = Count,color=Count)) %>%
 7. Data Collection and learning:
 Favourite Platform to learn Data science
 ````
+#Favourite Platform to learn Data science
 platformdf<-SurveyDf %>% group_by(LearningPlatformSelect) %>%
   summarise(count=n()) %>% top_n(20) %>% arrange(desc(count))
 platformdf[1,]<-NA
@@ -434,6 +436,7 @@ hchart(na.omit(platformdf),hcaes(x=LearningPlatformSelect,y=count),type="column"
 
 Pie chart of usefullness of learning platform
 ````
+#Pie chart of usefullness of learning platform
 df<- SurveyDf %>% dplyr::select(LearningPlatformUsefulnessArxiv,LearningPlatformUsefulnessYouTube,LearningPlatformUsefulnessKaggle,LearningPlatformUsefulnessCollege,LearningPlatformUsefulnessCourses) 
 df<-df[complete.cases(df),]
 # Data
@@ -445,6 +448,7 @@ df<-df[complete.cases(df),]
 
 Pie chart of Question How usefull are Online courses as learning platform
 ````
+#Pie chart of Question How usefull are Online courses as learning platform
 hchart(df$LearningPlatformUsefulnessCourses, "pie")  %>% 
   hc_exporting(enabled = TRUE) %>%
   hc_title(text="Pie chart of Question How usefull are Online courses as learning platform",align="center") %>% 
@@ -456,6 +460,7 @@ hchart(df$LearningPlatformUsefulnessCourses, "pie")  %>%
 
 Pie chart of Question How usefull us Collage as learning platform
 ````
+#Pie chart of Question How usefull us Collage as learning platform
 hchart(df$LearningPlatformUsefulnessCollege, "pie")  %>% 
   hc_exporting(enabled = TRUE) %>%
   hc_title(text="Pie chart of Question How usefull us Collage as learning platform",align="center") %>% 
@@ -467,6 +472,7 @@ hchart(df$LearningPlatformUsefulnessCollege, "pie")  %>%
 
 Pie chart of Question How usefull is Kaggle as learning platform
 ````
+#Pie chart of Question How usefull is Kaggle as learning platform
 hchart(df$LearningPlatformUsefulnessKaggle, "pie")  %>% 
   hc_exporting(enabled = TRUE) %>%
   hc_title(text="Pie chart of Question How usefull is Kaggle as learning platform",align="center") %>% 
@@ -478,6 +484,7 @@ hchart(df$LearningPlatformUsefulnessKaggle, "pie")  %>%
 
 Pie chart of Question How usefull is Youtube as learning platform
 ````
+#Pie chart of Question How usefull is Youtube as learning platform
 hchart(df$LearningPlatformUsefulnessYouTube, "pie") %>%  
   hc_exporting(enabled = TRUE) %>%
   hc_title(text="Pie chart of Question How usefull is Youtube as learning platform",align="center") %>% 
@@ -490,6 +497,7 @@ hchart(df$LearningPlatformUsefulnessYouTube, "pie") %>%
 8. Language Recommendation: 
 The most recommended tool by participants
 ````
+#The most recommended tool by participants
 table(LanguageRecommendationSelect)
 toolRecomdf<-as.data.frame(table(LanguageRecommendationSelect)) 
 names(toolRecomdf)<-c("tool","count")
@@ -506,6 +514,7 @@ hchart(na.omit(toolRecomdf),hcaes(x=tool,y=count),color="#56C1FE",type="column")
   
 Barplot of Recommended tools of participants
 ````
+#Barplot of Recommended tools of participants
 hcboxplot(x = SurveyDf$Age , var = SurveyDf$LanguageRecommendationSelect,name = "Age", color = "#E127AB",outliers = FALSE) %>%
   hc_chart(type="column") %>% 
   hc_exporting(enabled = TRUE) %>%
@@ -517,9 +526,9 @@ hcboxplot(x = SurveyDf$Age , var = SurveyDf$LanguageRecommendationSelect,name = 
 [Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No26)
 
 Which skills are important for becoming a data scientist?
-let's make a function to ease things
-function takes argument as a dataframe and the categorical variable which we want summarize and group
+let's make a function to ease things; these function takes argument as a dataframe and the categorical variable which we want summarize and group
 ````
+#Preparing functions
 aggr<-function(df,var) 
 {
   require(dplyr)
@@ -555,6 +564,7 @@ KaggleRankSkill<-aggr(SurveyDf,JobSkillImportanceKaggleRanking)
 KaggleRankSkill[1,]<-NA
 ````
 
+R
 ````
 #R
 hchart(na.omit(RSkill),hcaes(x=JobSkillImportanceR,y=count),type="pie",name="Count") %>% 
@@ -566,6 +576,7 @@ hchart(na.omit(RSkill),hcaes(x=JobSkillImportanceR,y=count),type="pie",name="Cou
 
 [Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No27)
 
+Python
 ````
 #Python
 hchart(na.omit(PythonSkill),hcaes(x=JobSkillImportancePython,y=count),type="pie",name="Count") %>%
@@ -577,7 +588,7 @@ hchart(na.omit(PythonSkill),hcaes(x=JobSkillImportancePython,y=count),type="pie"
 
 [Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No28)
 
-
+SQL
 ````
 #SQL
 hchart(na.omit(SqlSkill),hcaes(x=JobSkillImportanceSQL,y=count),type="pie",name="Count") %>% 
@@ -589,6 +600,7 @@ hchart(na.omit(SqlSkill),hcaes(x=JobSkillImportanceSQL,y=count),type="pie",name=
 
 [Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No29)
 
+Big Data
 ````
 #Big Data
 hchart(na.omit(BigDataSkill),hcaes(x=JobSkillImportanceBigData,y=count),type="pie",name="Count") %>% 
@@ -600,6 +612,7 @@ hchart(na.omit(BigDataSkill),hcaes(x=JobSkillImportanceBigData,y=count),type="pi
 
 [Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No30)
 
+Statistic
 ````
 #Statistic
 hchart(na.omit(StatsSkill),hcaes(x=JobSkillImportanceStats,y=count),type="pie",name="Count") %>% 
@@ -611,6 +624,7 @@ hchart(na.omit(StatsSkill),hcaes(x=JobSkillImportanceStats,y=count),type="pie",n
 
 [Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No31)
 
+Data Visulaization
 ````
 #Data Visulaization
 hchart(na.omit(DataVisSkill),hcaes(x=JobSkillImportanceVisualizations,y=count),type="pie",name="Count") %>% 
@@ -622,6 +636,7 @@ hchart(na.omit(DataVisSkill),hcaes(x=JobSkillImportanceVisualizations,y=count),t
 
 [Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No32)
 
+Importance of Degree
 ````
 #Importance of Degree
 hchart(na.omit(DegreeSkill),hcaes(x=JobSkillImportanceDegree,y=count),type="pie",name="Count") %>% 
@@ -633,6 +648,7 @@ hchart(na.omit(DegreeSkill),hcaes(x=JobSkillImportanceDegree,y=count),type="pie"
 
 [Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No33)
 
+Importance of Enterprise Tools skill
 ````
 #Importance of Enterprise Tools skill
 hchart(na.omit(EnterToolsSkill),hcaes(x=JobSkillImportanceEnterpriseTools,y=count),type="pie",name="Count") %>% 
@@ -644,7 +660,7 @@ hchart(na.omit(EnterToolsSkill),hcaes(x=JobSkillImportanceEnterpriseTools,y=coun
 
 [Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No34)
 
-
+Importance of MOOCs
 ````
 #Importance of MOOCs
 hchart(na.omit(MOOCSkill),hcaes(x=JobSkillImportanceMOOC,y=count),type="pie",name="Count") %>% 
@@ -656,6 +672,7 @@ hchart(na.omit(MOOCSkill),hcaes(x=JobSkillImportanceMOOC,y=count),type="pie",nam
 
 [Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No35)
 
+Importance of Kaggle Rankings
 ````
 #Importance of Kaggle Rankings
 hchart(na.omit(KaggleRankSkill),hcaes(x=JobSkillImportanceKaggleRanking,y=count),type="pie",name="Count") %>% 
@@ -666,4 +683,9 @@ hchart(na.omit(KaggleRankSkill),hcaes(x=JobSkillImportanceKaggleRanking,y=count)
 ![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/36.png)
 
 [Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No36)
+
+
+
+Final Note:
+You can find the completed R code in file "AnalysingMLSurvey.R" which contains the above code chunks besides many other visualization functions.
 
