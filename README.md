@@ -450,6 +450,9 @@ hchart(df$LearningPlatformUsefulnessCourses, "pie")  %>%
   hc_title(text="Pie chart of Question How usefull are Online courses as learning platform",align="center") %>% 
   hc_add_theme(hc_theme_elementary()) 
 ````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/22.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No22)
 
 Pie chart of Question How usefull us Collage as learning platform
 ````
@@ -458,6 +461,9 @@ hchart(df$LearningPlatformUsefulnessCollege, "pie")  %>%
   hc_title(text="Pie chart of Question How usefull us Collage as learning platform",align="center") %>% 
   hc_add_theme(hc_theme_elementary()) 
 ````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/23.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No23)
 
 Pie chart of Question How usefull is Kaggle as learning platform
 ````
@@ -466,6 +472,9 @@ hchart(df$LearningPlatformUsefulnessKaggle, "pie")  %>%
   hc_title(text="Pie chart of Question How usefull is Kaggle as learning platform",align="center") %>% 
   hc_add_theme(hc_theme_elementary()) 
 ````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/24.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No24)
 
 Pie chart of Question How usefull is Youtube as learning platform
 ````
@@ -474,6 +483,9 @@ hchart(df$LearningPlatformUsefulnessYouTube, "pie") %>%
   hc_title(text="Pie chart of Question How usefull is Youtube as learning platform",align="center") %>% 
   hc_add_theme(hc_theme_elementary()) 
 ````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/25.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No25)
 
 8. Language Recommendation: 
 The most recommended tool by participants
@@ -488,6 +500,9 @@ hchart(na.omit(toolRecomdf),hcaes(x=tool,y=count),color="#56C1FE",type="column")
   hc_title(text="Barplot of Recommended tools of participants",align="center") %>%
   hc_add_theme(hc_theme_elementary()) 
 ````  
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/26.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No26)
   
 Barplot of Recommended tools of participants
 ````
@@ -497,6 +512,9 @@ hcboxplot(x = SurveyDf$Age , var = SurveyDf$LanguageRecommendationSelect,name = 
   hc_title(text="Boxplot of tools recommended by participants and their Ages",align="center") %>% 
   hc_add_theme(hc_theme_elementary())
 ````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/26.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No26)
 
 Which skills are important for becoming a data scientist?
 let's make a function to ease things
@@ -544,6 +562,9 @@ hchart(na.omit(RSkill),hcaes(x=JobSkillImportanceR,y=count),type="pie",name="Cou
   hc_title(text="Piechart of importance of R skill",align="center") %>%
   hc_add_theme(hc_theme_elementary())
 ````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/27.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No27)
 
 ````
 #Python
@@ -552,6 +573,10 @@ hchart(na.omit(PythonSkill),hcaes(x=JobSkillImportancePython,y=count),type="pie"
   hc_title(text="Piechart of importance of Python skill",align="center") %>%
   hc_add_theme(hc_theme_elementary())
 ````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/28.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No28)
+
 
 ````
 #SQL
@@ -560,6 +585,9 @@ hchart(na.omit(SqlSkill),hcaes(x=JobSkillImportanceSQL,y=count),type="pie",name=
   hc_title(text="Piechart of importance of SQL skill",align="center") %>%
   hc_add_theme(hc_theme_elementary())
 ````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/29.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No29)
 
 ````
 #Big Data
@@ -568,6 +596,9 @@ hchart(na.omit(BigDataSkill),hcaes(x=JobSkillImportanceBigData,y=count),type="pi
   hc_title(text="Piechart of importance of Big Data skill",align="center") %>%
   hc_add_theme(hc_theme_elementary())
 ````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/30.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No30)
 
 ````
 #Statistic
@@ -576,6 +607,9 @@ hchart(na.omit(StatsSkill),hcaes(x=JobSkillImportanceStats,y=count),type="pie",n
   hc_title(text="Piechart of importance of Statistics kill",align="center") %>%
   hc_add_theme(hc_theme_elementary())
 ````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/31.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No31)
 
 ````
 #Data Visulaization
@@ -584,6 +618,10 @@ hchart(na.omit(DataVisSkill),hcaes(x=JobSkillImportanceVisualizations,y=count),t
   hc_title(text="Piechart of importance of Data Viz skill",align="center") %>%
   hc_add_theme(hc_theme_elementary())
 ````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/32.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No32)
+
 ````
 #Importance of Degree
 hchart(na.omit(DegreeSkill),hcaes(x=JobSkillImportanceDegree,y=count),type="pie",name="Count") %>% 
@@ -591,6 +629,9 @@ hchart(na.omit(DegreeSkill),hcaes(x=JobSkillImportanceDegree,y=count),type="pie"
   hc_title(text="Piechart of importance of Degree",align="center") %>%
   hc_add_theme(hc_theme_elementary())
 ````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/33.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No33)
 
 ````
 #Importance of Enterprise Tools skill
@@ -599,6 +640,10 @@ hchart(na.omit(EnterToolsSkill),hcaes(x=JobSkillImportanceEnterpriseTools,y=coun
   hc_title(text="Piechart of importance of Enterprise Tools skill",align="center") %>%
   hc_add_theme(hc_theme_elementary())
 ````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/34.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No34)
+
 
 ````
 #Importance of MOOCs
@@ -607,6 +652,9 @@ hchart(na.omit(MOOCSkill),hcaes(x=JobSkillImportanceMOOC,y=count),type="pie",nam
   hc_title(text="Piechart of importance of MOOCs",align="center") %>%
   hc_add_theme(hc_theme_elementary())
 ````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/35.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No35)
 
 ````
 #Importance of Kaggle Rankings
@@ -615,3 +663,7 @@ hchart(na.omit(KaggleRankSkill),hcaes(x=JobSkillImportanceKaggleRanking,y=count)
   hc_title(text="Piechart of importance of Kaggle Rankings",align="center") %>%
   hc_add_theme(hc_theme_elementary())
 ````
+![Scatter plot of ML tools used by participants and their Mean Ages](https://github.com/SedeeqAlkhazraji/Exploring-Data-Science/blob/master/Report_Img/36.png)
+
+[Interactive Scatter plot of ML tools used by participants and their Mean Ages](http://rpubs.com/Sedeeq/No36)
+
