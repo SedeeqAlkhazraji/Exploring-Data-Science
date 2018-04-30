@@ -689,3 +689,16 @@ hchart(na.omit(KaggleRankSkill),hcaes(x=JobSkillImportanceKaggleRanking,y=count)
 Final Note:
 You can find the completed R code in file "AnalysingMLSurvey.R" which contains the above code chunks besides many other visualization functions.
 
+
+## Contributing
+* **Omar Ahmed Gharbia ** {oag1929@rit.edu} and  **Jietong Chen** {jc3165@rit.edu}
+
+## Authors
+
+* **Sedeeq Al-khazraji** - *Initial work* -
+https://github.com/SedeeqAlkhazraji
+
+## License
+This project is licensed under the  GNU GENERAL PUBLIC LICENSE License - see the [LICENSE.md](LICENSE.md) file for details
+
+
